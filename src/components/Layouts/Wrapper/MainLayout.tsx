@@ -22,7 +22,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       gap: '20px',
     }}>
       <NavBar />
-      <div>
+      <div style={{marginTop:"40px"}}>
         {children}
       </div>
     </div>

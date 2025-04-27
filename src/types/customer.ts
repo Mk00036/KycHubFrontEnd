@@ -12,5 +12,6 @@ export interface Customer {
     status: string;
     // riskScore is optional because it's commented out in your sample
     riskScore?: number;
+    otherDetails?: string;
   }
   

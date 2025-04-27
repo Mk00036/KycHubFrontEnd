@@ -139,11 +139,6 @@ const NavBar = (props: Props) => {
           {drawer}
         </Drawer>
       </Box>
-
-      {/* Main Content Placeholder */}
-      <Box component="main" sx={{ p: 3, width: "100%" }}>
-        <Toolbar />
-      </Box>
     </Box>
   );
 };

@@ -137,19 +137,27 @@ const DashBoardTable: React.FC<DashBoardTableProps> = ({ customers }) => {
 
   return (
     <>
-      <Space>
+    <div style={{display:"flex", flexDirection:"column", gap:"10px"}}>
+      <Space style={{paddingInline:"20px"}}>
         <Button onClick={setIncomeSort}>Sort by Income</Button>
         <Button onClick={clearFilters}>Clear Filters</Button>
         <Button onClick={clearAll}>Clear All</Button>
       </Space>
-      <div style={{ overflowX: "auto" }}>
+
+      <div style={{
+        width: "100%",
+        overflowX: "auto",
+        paddingInline: "20px",
+      }}>
         <Table<DataType>
           columns={columns}
           dataSource={data}
           onChange={handleChange}
           scroll={{ x: "max-content" }}
+          style={{ border: "1px solid lightgray", borderRadius: "4px"}}
         />
       </div>
+    </div>
     </>
   );
 };

@@ -1,7 +1,6 @@
-import React from "react";
 import DashBoardTable from "./DashBoardTable/DashBoardTable";
 import useCustomers from "../../../customHooks/useCustomers";
-import { Spin, Row, Col, Card } from "antd"; // Ant Design components
+import { Spin, Row, Col, Card } from "antd";
 import {
   PieChart,
   Pie,
@@ -14,12 +13,13 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-} from "recharts"; // Recharts components
+} from "recharts";
+import PageLayout from "../../Layouts/Wrapper/PageLayout";
 
 const OverView = () => {
   const { customers, loading, error } = useCustomers();
 
-  // Prepare risk score data for Pie Chart
+  // Pie chart data (risk score distribution)
   const riskData = [
     {
       name: "Low Risk",
@@ -57,21 +57,43 @@ const OverView = () => {
     return `${name} (${(percent * 100).toFixed(0)}%)`;
   };
 
-  // Prepare income vs expenses data for Line Chart
+  // Line chart data (income vs expenses)
   const lineChartData = customers.map((customer) => ({
     name: customer.name,
     income: customer.monthlyIncome,
     expenses: customer.monthlyExpenses,
   }));
 
+  // Card style with border and hover shadow
+  const cardStyle: React.CSSProperties = {
+    border: "1px solid #d9d9d9",
+    borderRadius: "8px",
+    transition: "box-shadow 0.3s ease",
+    cursor: "pointer",
+  };
+
   return (
-    <div style={{ padding: "20px" }}>
+    <PageLayout>
       {/* Loading Spinner */}
       {loading && (
-        <div style={{ textAlign: "center", padding: "50px" }}>
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "rgba(240, 240, 240, 0.7)", // light gray with slight transparency
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999,
+          }}
+        >
           <Spin size="large" tip="Loading customers..." />
         </div>
       )}
+
       {/* Error Handling */}
       {error && (
         <div style={{ color: "red", textAlign: "center", padding: "20px" }}>
@@ -82,9 +104,14 @@ const OverView = () => {
       {/* Main Content */}
       {!loading && !error && (
         <>
+          {/* Statistic Cards */}
           <Row gutter={[16, 16]} style={{ marginBottom: "24px" }}>
             <Col xs={24} sm={12} md={8}>
-              <Card>
+              <Card
+                hoverable
+                style={cardStyle}
+                bodyStyle={{ textAlign: "center" }}
+              >
                 <h3>Total Customers</h3>
                 <p style={{ fontSize: "24px", fontWeight: "bold" }}>
                   {customers.length}
@@ -92,7 +119,11 @@ const OverView = () => {
               </Card>
             </Col>
             <Col xs={24} sm={12} md={8}>
-              <Card>
+              <Card
+                hoverable
+                style={cardStyle}
+                bodyStyle={{ textAlign: "center" }}
+              >
                 <h3>Average Income</h3>
                 <p style={{ fontSize: "24px", fontWeight: "bold" }}>
                   $
@@ -106,7 +137,11 @@ const OverView = () => {
               </Card>
             </Col>
             <Col xs={24} sm={12} md={8}>
-              <Card>
+              <Card
+                hoverable
+                style={cardStyle}
+                bodyStyle={{ textAlign: "center" }}
+              >
                 <h3>Average Expenses</h3>
                 <p style={{ fontSize: "24px", fontWeight: "bold" }}>
                   $
@@ -120,11 +155,12 @@ const OverView = () => {
               </Card>
             </Col>
           </Row>
+
           {/* Charts Section */}
           <Row gutter={[16, 16]}>
             {/* Pie Chart */}
             <Col xs={24} sm={24} md={12} lg={12}>
-              <Card title="Risk Score Distribution">
+              <Card hoverable title="Risk Score Distribution" style={cardStyle}>
                 <ResponsiveContainer width="100%" height={250}>
                   <PieChart>
                     <Pie
@@ -151,7 +187,7 @@ const OverView = () => {
 
             {/* Line Chart */}
             <Col xs={24} sm={24} md={12} lg={12}>
-              <Card title="Income vs Expenses">
+              <Card hoverable title="Income vs Expenses" style={cardStyle}>
                 <ResponsiveContainer width="100%" height={250}>
                   <LineChart data={lineChartData}>
                     <CartesianGrid strokeDasharray="3 3" />
@@ -174,11 +210,18 @@ const OverView = () => {
 
           {/* Table Section */}
           <div style={{ marginTop: "24px" }}>
-            <DashBoardTable customers={customers} />
+            <Card
+              hoverable
+              title="Customers Details"
+              style={cardStyle}
+              bodyStyle={{ padding: "10px" }}
+            >
+              <DashBoardTable customers={customers} />
+            </Card>
           </div>
         </>
       )}
-    </div>
+    </PageLayout>
   );
 };
 
