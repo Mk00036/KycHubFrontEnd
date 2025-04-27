@@ -1,18 +1,18 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import MenuIcon from "@mui/icons-material/Menu";
+import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   window?: () => Window;
@@ -20,9 +20,9 @@ interface Props {
 
 const drawerWidth = 240;
 const navItems = [
-  { label: 'Dashboard', path: '/' },
-  { label: 'Risk Assessment', path: '/risk-assessment' },
-  { label: 'Workflow Automation', path: '/workflow-automation' }
+  { label: "Dashboard", path: "/" },
+  { label: "Risk Assessment", path: "/risk-assessment" },
+  { label: "Workflow Automation", path: "/workflow-automation" },
 ];
 
 const NavBar = (props: Props) => {
@@ -40,22 +40,22 @@ const NavBar = (props: Props) => {
   };
 
   const drawer = (
-    <Box sx={{ textAlign: 'center' }}>
+    <Box sx={{ textAlign: "center" }}>
       <Box sx={{ py: 2 }}>
         <img
           width="90"
           height="62"
-          style={{ padding: '5px' }}
+          style={{ padding: "5px" }}
           src="https://www.kychub.com/wp-content/uploads/2023/05/LOGO_White.svg"
           alt="Logo"
         />
       </Box>
-      <Divider sx={{ borderColor: '#ffffff30' }} />
+      <Divider sx={{ borderColor: "#ffffff30" }} />
       <List>
         {navItems.map((item) => (
           <ListItem key={item.path} disablePadding>
             <ListItemButton
-              sx={{ textAlign: 'center' }}
+              sx={{ textAlign: "center" }}
               onClick={() => handleNavigation(item.path)}
             >
               <ListItemText primary={item.label} />
@@ -66,30 +66,35 @@ const NavBar = (props: Props) => {
     </Box>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{ backgroundColor: '#22284f' }}>
+      <AppBar component="nav" sx={{ backgroundColor: "#22284f" }}>
         <Toolbar>
           {/* Desktop Logo */}
-          <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ flexGrow: 1, display: "flex", alignItems: "center" }}>
             <img
               width="90"
               height="62"
-              style={{ padding: '5px' }}
+              style={{ padding: "5px" }}
               src="https://www.kychub.com/wp-content/uploads/2023/05/LOGO_White.svg"
               alt="Logo"
             />
           </Box>
 
           {/* Desktop Nav Items */}
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+          <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
               <Button
                 key={item.path}
-                sx={{ color: '#fff', textTransform: 'none', fontWeight: 'bold' }}
+                sx={{
+                  color: "#fff",
+                  textTransform: "none",
+                  fontWeight: "bold",
+                }}
                 onClick={() => handleNavigation(item.path)}
               >
                 {item.label}
@@ -103,7 +108,7 @@ const NavBar = (props: Props) => {
             aria-label="open drawer"
             edge="end"
             onClick={handleDrawerToggle}
-            sx={{ display: { sm: 'none' } }}
+            sx={{ display: { sm: "none" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -122,12 +127,12 @@ const NavBar = (props: Props) => {
             keepMounted: true,
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': {
-              boxSizing: 'border-box',
+            display: { xs: "block", sm: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
               width: drawerWidth,
-              backgroundColor: '#22284f',
-              color: '#fff',
+              backgroundColor: "#22284f",
+              color: "#fff",
             },
           }}
         >
@@ -136,7 +141,7 @@ const NavBar = (props: Props) => {
       </Box>
 
       {/* Main Content Placeholder */}
-      <Box component="main" sx={{ p: 3, width: '100%' }}>
+      <Box component="main" sx={{ p: 3, width: "100%" }}>
         <Toolbar />
       </Box>
     </Box>

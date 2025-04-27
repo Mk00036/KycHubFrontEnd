@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import type { TableColumnsType, TableProps } from 'antd';
-import { Button, Space, Table } from 'antd';
-import { Customer } from '../../../../types/customer';
-
-type OnChange = NonNullable<TableProps<DataType>['onChange']>;
+import React, { useState } from "react";
+import type { TableColumnsType, TableProps } from "antd";
+import { Button, Space, Table } from "antd";
+import { Customer } from "../../../../types/customer";
+import "./index.css";
+type OnChange = NonNullable<TableProps<DataType>["onChange"]>;
 type Filters = Parameters<OnChange>[1];
 type GetSingle<T> = T extends (infer U)[] ? U : never;
 type Sorts = GetSingle<Parameters<OnChange>[2]>;
@@ -29,7 +29,7 @@ const DashBoardTable: React.FC<DashBoardTableProps> = ({ customers }) => {
   const [sortedInfo, setSortedInfo] = useState<Sorts>({});
 
   const handleChange: OnChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
+    console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter as Sorts);
   };
@@ -45,71 +45,76 @@ const DashBoardTable: React.FC<DashBoardTableProps> = ({ customers }) => {
 
   const setIncomeSort = () => {
     setSortedInfo({
-      order: 'descend',
-      columnKey: 'monthlyIncome',
+      order: "descend",
+      columnKey: "monthlyIncome",
     });
   };
 
   const columns: TableColumnsType<DataType> = [
     {
-      title: 'Customer ID',
-      dataIndex: 'customerId',
-      key: 'customerId',
+      title: "Customer ID",
+      dataIndex: "customerId",
+      key: "customerId",
       ellipsis: true,
     },
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
       ellipsis: true,
     },
     {
-      title: 'Monthly Income',
-      dataIndex: 'monthlyIncome',
-      key: 'monthlyIncome',
+      title: "Monthly Income",
+      dataIndex: "monthlyIncome",
+      key: "monthlyIncome",
       sorter: (a, b) => a.monthlyIncome - b.monthlyIncome,
-      sortOrder: sortedInfo.columnKey === 'monthlyIncome' ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "monthlyIncome" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
-      title: 'Monthly Expenses',
-      dataIndex: 'monthlyExpenses',
-      key: 'monthlyExpenses',
+      title: "Monthly Expenses",
+      dataIndex: "monthlyExpenses",
+      key: "monthlyExpenses",
       sorter: (a, b) => a.monthlyExpenses - b.monthlyExpenses,
-      sortOrder: sortedInfo.columnKey === 'monthlyExpenses' ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "monthlyExpenses" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
-      title: 'Credit Score',
-      dataIndex: 'creditScore',
-      key: 'creditScore',
+      title: "Credit Score",
+      dataIndex: "creditScore",
+      key: "creditScore",
       sorter: (a, b) => a.creditScore - b.creditScore,
-      sortOrder: sortedInfo.columnKey === 'creditScore' ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "creditScore" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
-      title: 'Outstanding Loans',
-      dataIndex: 'outstandingLoans',
-      key: 'outstandingLoans',
+      title: "Outstanding Loans",
+      dataIndex: "outstandingLoans",
+      key: "outstandingLoans",
       sorter: (a, b) => a.outstandingLoans - b.outstandingLoans,
-      sortOrder: sortedInfo.columnKey === 'outstandingLoans' ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "outstandingLoans" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
-      title: 'Account Balance',
-      dataIndex: 'accountBalance',
-      key: 'accountBalance',
+      title: "Account Balance",
+      dataIndex: "accountBalance",
+      key: "accountBalance",
       sorter: (a, b) => a.accountBalance - b.accountBalance,
-      sortOrder: sortedInfo.columnKey === 'accountBalance' ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "accountBalance" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
       filters: [
-        { text: 'Review', value: 'Review' },
-        { text: 'Approved', value: 'Approved' },
+        { text: "Review", value: "Review" },
+        { text: "Approved", value: "Approved" },
       ],
       filteredValue: filteredInfo.status || null,
       onFilter: (value, record) => record.status.includes(value as string),
@@ -137,12 +142,15 @@ const DashBoardTable: React.FC<DashBoardTableProps> = ({ customers }) => {
         <Button onClick={clearFilters}>Clear Filters</Button>
         <Button onClick={clearAll}>Clear All</Button>
       </Space>
-      <Table<DataType>
-        columns={columns}
-        dataSource={data}
-        onChange={handleChange}
-        scroll={{ x: 'max-content' }}
-      />
+
+      <div style={{ width: "100%", overflowX: "auto" }}>
+        <Table<DataType>
+          columns={columns}
+          dataSource={data}
+          onChange={handleChange}
+          scroll={{ x: "max-content" }}
+        />
+      </div>
     </>
   );
 };
