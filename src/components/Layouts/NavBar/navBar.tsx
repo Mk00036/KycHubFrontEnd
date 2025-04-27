@@ -35,20 +35,23 @@ export default function NavBar (props: Props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
-      </Typography>
-      <Divider />
-      <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
+    <Typography variant="h6" sx={{ my: 2 }}>
+      MUI
+    </Typography>
+    <Typography variant="body1" sx={{ mb: 2 }}>
+      Welcome to the mobile menu!
+    </Typography>
+    <Divider />
+    <List>
+      {navItems.map((item) => (
+        <ListItem key={item} disablePadding>
+          <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemText primary={item} />
+          </ListItemButton>
+        </ListItem>
+      ))}
+    </List>
+  </Box>
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
@@ -56,7 +59,8 @@ export default function NavBar (props: Props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar component="nav">
+      <AppBar component="nav" sx={{ backgroundColor: '#22284f' }}>
+
         <Toolbar>
           <IconButton
             color="inherit"
@@ -72,7 +76,7 @@ export default function NavBar (props: Props) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            <img width="90" height="62" style={{ padding: '5px' }} src="https://www.kychub.com/wp-content/uploads/2023/05/LOGO_White.svg" alt="logo"></img>
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
@@ -102,7 +106,7 @@ export default function NavBar (props: Props) {
       </nav>
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
-       
+        <img width="110" height="82" src="https://www.kychub.com/wp-content/uploads/2023/05/LOGO_White.svg" alt="logo"/>
       </Box>
     </Box>
   );
