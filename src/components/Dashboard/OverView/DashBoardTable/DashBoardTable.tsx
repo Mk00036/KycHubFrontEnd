@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { TableColumnsType, TableProps } from 'antd';
 import { Button, Space, Table } from 'antd';
+import { Customer } from '../../../../types/customer';
 
 type OnChange = NonNullable<TableProps<DataType>['onChange']>;
 type Filters = Parameters<OnChange>[1];
@@ -19,33 +20,11 @@ interface DataType {
   status: string;
 }
 
-// NEW: Update data
-const data: DataType[] = [
-  {
-    key: '1',
-    customerId: 'CUST1001',
-    name: 'Alice Johnson',
-    monthlyIncome: 6200,
-    monthlyExpenses: 3500,
-    creditScore: 710,
-    outstandingLoans: 15000,
-    accountBalance: 12500,
-    status: 'Review',
-  },
-  {
-    key: '2',
-    customerId: 'CUST1002',
-    name: 'Bob Smith',
-    monthlyIncome: 4800,
-    monthlyExpenses: 2800,
-    creditScore: 640,
-    outstandingLoans: 20000,
-    accountBalance: 7300,
-    status: 'Approved',
-  },
-];
+interface DashBoardTableProps {
+  customers: Customer[];
+}
 
-const dashBoardTable : React.FC = () => {
+const DashBoardTable: React.FC<DashBoardTableProps> = ({ customers }) => {
   const [filteredInfo, setFilteredInfo] = useState<Filters>({});
   const [sortedInfo, setSortedInfo] = useState<Sorts>({});
 
@@ -71,7 +50,6 @@ const dashBoardTable : React.FC = () => {
     });
   };
 
-  // NEW: Update columns
   const columns: TableColumnsType<DataType> = [
     {
       title: 'Customer ID',
@@ -139,6 +117,19 @@ const dashBoardTable : React.FC = () => {
     },
   ];
 
+  // Convert customers to DataType for table
+  const data: DataType[] = customers.map((customer) => ({
+    key: customer.customerId,
+    customerId: customer.customerId,
+    name: customer.name,
+    monthlyIncome: customer.monthlyIncome,
+    monthlyExpenses: customer.monthlyExpenses,
+    creditScore: customer.creditScore,
+    outstandingLoans: customer.outstandingLoans,
+    accountBalance: customer.accountBalance,
+    status: customer.status,
+  }));
+
   return (
     <>
       <Space style={{ marginBottom: 16 }}>
@@ -146,9 +137,14 @@ const dashBoardTable : React.FC = () => {
         <Button onClick={clearFilters}>Clear Filters</Button>
         <Button onClick={clearAll}>Clear All</Button>
       </Space>
-      <Table<DataType> columns={columns} dataSource={data} onChange={handleChange} />
+      <Table<DataType>
+        columns={columns}
+        dataSource={data}
+        onChange={handleChange}
+        scroll={{ x: 'max-content' }}
+      />
     </>
   );
 };
 
-export default dashBoardTable;
+export default DashBoardTable;
