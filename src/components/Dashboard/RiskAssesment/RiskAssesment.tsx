@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   Card,
   Table,
@@ -98,13 +99,7 @@ const RiskAssessment = () => {
     },
   ];
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-80">
-        <Spin tip="Loading customers..." size="large" />
-      </div>
-    );
-  }
+
 
   if (error) {
     return (
@@ -132,7 +127,30 @@ const RiskAssessment = () => {
         )
       : 0;
 
+     
+
   return (
+    <>
+     {loading && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "rgba(240, 240, 240, 0.7)", // light gray with slight transparency
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999,
+          }}
+        >
+          <Spin size="large" tip="Loading customers..." />
+        </div>
+      )}
+      
+      {!loading && !error && (
     <div className="p-6 grid grid-cols-1 gap-4">
       <Row gutter={16} style={{ marginBottom: 24 }}>
         <Col span={6}>
@@ -302,6 +320,8 @@ const RiskAssessment = () => {
         )}
       </Drawer>
     </div>
+       )}
+    </>
   );
 };
 

@@ -155,6 +155,7 @@ const DashBoardTable: React.FC<DashBoardTableProps> = ({ customers }) => {
           onChange={handleChange}
           scroll={{ x: "max-content" }}
           style={{ border: "1px solid lightgray", borderRadius: "4px"}}
+          pagination={{ pageSize: 5 }}
         />
       </div>
     </div>
