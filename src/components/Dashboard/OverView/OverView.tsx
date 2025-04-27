@@ -72,45 +72,6 @@ const OverView = () => {
           <Spin size="large" tip="Loading customers..." />
         </div>
       )}
-      <Row gutter={[16, 16]} style={{ marginBottom: "24px" }}>
-        <Col xs={24} sm={12} md={8}>
-          <Card>
-            <h3>Total Customers</h3>
-            <p style={{ fontSize: "24px", fontWeight: "bold" }}>
-              {customers.length}
-            </p>
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={8}>
-          <Card>
-            <h3>Average Income</h3>
-            <p style={{ fontSize: "24px", fontWeight: "bold" }}>
-              $
-              {(
-                customers.reduce(
-                  (acc, curr) => acc + (curr.monthlyIncome || 0),
-                  0
-                ) / customers.length
-              ).toFixed(2)}
-            </p>
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={8}>
-          <Card>
-            <h3>Average Expenses</h3>
-            <p style={{ fontSize: "24px", fontWeight: "bold" }}>
-              $
-              {(
-                customers.reduce(
-                  (acc, curr) => acc + (curr.monthlyExpenses || 0),
-                  0
-                ) / customers.length
-              ).toFixed(2)}
-            </p>
-          </Card>
-        </Col>
-      </Row>
-
       {/* Error Handling */}
       {error && (
         <div style={{ color: "red", textAlign: "center", padding: "20px" }}>
@@ -121,6 +82,44 @@ const OverView = () => {
       {/* Main Content */}
       {!loading && !error && (
         <>
+          <Row gutter={[16, 16]} style={{ marginBottom: "24px" }}>
+            <Col xs={24} sm={12} md={8}>
+              <Card>
+                <h3>Total Customers</h3>
+                <p style={{ fontSize: "24px", fontWeight: "bold" }}>
+                  {customers.length}
+                </p>
+              </Card>
+            </Col>
+            <Col xs={24} sm={12} md={8}>
+              <Card>
+                <h3>Average Income</h3>
+                <p style={{ fontSize: "24px", fontWeight: "bold" }}>
+                  $
+                  {(
+                    customers.reduce(
+                      (acc, curr) => acc + (curr.monthlyIncome || 0),
+                      0
+                    ) / customers.length
+                  ).toFixed(2)}
+                </p>
+              </Card>
+            </Col>
+            <Col xs={24} sm={12} md={8}>
+              <Card>
+                <h3>Average Expenses</h3>
+                <p style={{ fontSize: "24px", fontWeight: "bold" }}>
+                  $
+                  {(
+                    customers.reduce(
+                      (acc, curr) => acc + (curr.monthlyExpenses || 0),
+                      0
+                    ) / customers.length
+                  ).toFixed(2)}
+                </p>
+              </Card>
+            </Col>
+          </Row>
           {/* Charts Section */}
           <Row gutter={[16, 16]}>
             {/* Pie Chart */}

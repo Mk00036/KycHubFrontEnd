@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import type { TableColumnsType, TableProps } from "antd";
 import { Button, Space, Table } from "antd";
 import { Customer } from "../../../../types/customer";
-import "./index.css";
+
 type OnChange = NonNullable<TableProps<DataType>["onChange"]>;
 type Filters = Parameters<OnChange>[1];
 type GetSingle<T> = T extends (infer U)[] ? U : never;
@@ -137,13 +137,12 @@ const DashBoardTable: React.FC<DashBoardTableProps> = ({ customers }) => {
 
   return (
     <>
-      <Space style={{ marginBottom: 16 }}>
+      <Space>
         <Button onClick={setIncomeSort}>Sort by Income</Button>
         <Button onClick={clearFilters}>Clear Filters</Button>
         <Button onClick={clearAll}>Clear All</Button>
       </Space>
-
-      <div style={{ width: "100%", overflowX: "auto" }}>
+      <div style={{ overflowX: "auto" }}>
         <Table<DataType>
           columns={columns}
           dataSource={data}

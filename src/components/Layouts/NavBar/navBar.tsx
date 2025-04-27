@@ -70,7 +70,7 @@ const NavBar = (props: Props) => {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", width:"100%", maxWidth:"1680px" }}>
       <CssBaseline />
       <AppBar component="nav" sx={{ backgroundColor: "#22284f" }}>
         <Toolbar>
@@ -79,7 +79,7 @@ const NavBar = (props: Props) => {
             <img
               width="90"
               height="62"
-              style={{ padding: "5px" }}
+              style={{ padding: "11px" }}
               src="https://www.kychub.com/wp-content/uploads/2023/05/LOGO_White.svg"
               alt="Logo"
             />
