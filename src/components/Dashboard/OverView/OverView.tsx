@@ -171,7 +171,7 @@ const OverView = () => {
                       label={renderCustomLabel}
                       labelLine={false}
                     >
-                      {riskData.map((entry, index) => (
+                      {riskData.map((_entry, index) => (
                         <Cell
                           key={`cell-${index}`}
                           fill={

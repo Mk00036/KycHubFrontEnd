@@ -4,7 +4,7 @@ import { Spin } from "antd";
 import PageLayout from "../../Layouts/Wrapper/PageLayout";
 
 const WorkFlowAutomation = () => {
-  const { customers, loading, error } = useCustomers();
+  const { loading, error } = useCustomers();
 
   return (
     <PageLayout>

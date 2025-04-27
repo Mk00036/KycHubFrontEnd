@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 import {
   Card,
   Table,
@@ -17,6 +15,7 @@ import {
 import type { ColumnsType } from "antd/es/table";
 import useCustomers from "../../../customHooks/useCustomers";
 import { Customer } from "../../../types/customer";
+import { useState } from "react";
 
 const { Option } = Select;
 const { Search } = Input;
@@ -149,7 +148,7 @@ const RiskAssessment = () => {
           <Spin size="large" tip="Loading customers..." />
         </div>
       )}
-      
+
       {!loading && !error && (
     <div className="p-6 grid grid-cols-1 gap-4">
       <Row gutter={16} style={{ marginBottom: 24 }}>
