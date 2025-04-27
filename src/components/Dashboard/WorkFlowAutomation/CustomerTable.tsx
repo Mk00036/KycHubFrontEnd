@@ -11,6 +11,7 @@ import {
   Button,
   Modal,
   Form,
+  Spin, // Import Spin component
 } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { toast, ToastContainer } from "react-toastify";
@@ -38,6 +39,9 @@ const CustomerTable: React.FC = () => {
   const [statusFilter, setStatusFilter] = useState("All");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
+  const [loading, setLoading] = useState(false); // Loading state for API request
+
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/customers';
 
   const [form] = Form.useForm();
 
@@ -47,12 +51,14 @@ const CustomerTable: React.FC = () => {
 
   const fetchCustomers = async () => {
     try {
-      // Replace this URL with your API endpoint
-      const response = await axios.get<Customer[]>("http://localhost:5000/api/customers");
+      setLoading(true); // Start loading
+      const response = await axios.get<Customer[]>(apiUrl);
       setCustomers(response.data);
     } catch (error) {
       console.error("Failed to fetch customers", error);
       toast.error("Failed to fetch customers!");
+    } finally {
+      setLoading(false); // End loading
     }
   };
 
@@ -95,7 +101,7 @@ const CustomerTable: React.FC = () => {
       };
 
       // PUT API call
-      await axios.put(`http://localhost:5000/api/customers/${selectedCustomer.customerId}`, updatedCustomer);
+      await axios.put(`${apiUrl}/${selectedCustomer.customerId}`, updatedCustomer);
 
       toast.success("Customer updated successfully!");
       setIsModalOpen(false);
@@ -108,7 +114,6 @@ const CustomerTable: React.FC = () => {
 
   const handleModalCancel = () => {
     setIsModalOpen(false);
-    
   };
 
   const columns: ColumnsType<Customer> = [
@@ -176,6 +181,26 @@ const CustomerTable: React.FC = () => {
   return (
     <>
       <ToastContainer /> {/* Toast Container */}
+
+      {/* Loading Spinner */}
+      {loading && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "rgba(240, 240, 240, 0.7)", // light gray with slight transparency
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999,
+          }}
+        >
+          <Spin size="large" tip="Loading customers..." />
+        </div>
+      )}
 
       <Row gutter={16} style={{ marginBottom: 16 }}>
         <Col span={12}>
