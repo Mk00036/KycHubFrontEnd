@@ -42,13 +42,13 @@ const NavBar = (props: Props) => {
   const drawer = (
     <Box sx={{ textAlign: "center" }}>
       <Box sx={{ py: 2 }}>
-        <img
+        {/* <img
           width="90"
           height="62"
           style={{ padding: "5px" }}
           // src="https://www.kychub.com/wp-content/uploads/2023/05/LOGO_White.svg"
           alt="Logo"
-        />
+        /> */}
       </Box>
       <Divider sx={{ borderColor: "#ffffff30" }} />
       <List>
