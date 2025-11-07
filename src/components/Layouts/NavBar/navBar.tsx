@@ -21,8 +21,8 @@ interface Props {
 const drawerWidth = 240;
 const navItems = [
   { label: "Dashboard", path: "/" },
-  { label: "Risk Assessment", path: "/risk-assessment" },
-  { label: "Workflow Automation", path: "/workflow-automation" },
+  { label: "Management", path: "/risk-assessment" },
+  { label: "", path: "/workflow-automation" },
 ];
 
 const NavBar = (props: Props) => {
@@ -46,7 +46,7 @@ const NavBar = (props: Props) => {
           width="90"
           height="62"
           style={{ padding: "5px" }}
-          src="https://www.kychub.com/wp-content/uploads/2023/05/LOGO_White.svg"
+          // src="https://www.kychub.com/wp-content/uploads/2023/05/LOGO_White.svg"
           alt="Logo"
         />
       </Box>
@@ -80,7 +80,7 @@ const NavBar = (props: Props) => {
               width="90"
               height="62"
               style={{ padding: "11px" }}
-              src="https://www.kychub.com/wp-content/uploads/2023/05/LOGO_White.svg"
+              // src="https://www.kychub.com/wp-content/uploads/2023/05/LOGO_White.svg"
               alt="Logo"
             />
           </Box>

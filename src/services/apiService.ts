@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // Use import.meta.env to access Vite's environment variables
-const GET_CUSTOMER_API_URL = import.meta.env.VITE_API_URL;
+const GET_CUSTOMER_API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api/customers";
 
 export const fetchCustomers = async () => {
   try {
